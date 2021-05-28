@@ -2,7 +2,7 @@
 # License: MIT. See license file in root directory
 # Copyright(c) JetsonHacks (2017-2018)
 
-OPENCV_VERSION=3.4.3
+OPENCV_VERSION=3.4.14
 # Jetson AGX Xavier
 ARCH_BIN=7.2
 # Jetson TX2
@@ -115,7 +115,11 @@ sudo apt-get install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
 cd $OPENCV_SOURCE_DIR
 git clone https://github.com/opencv/opencv.git
 cd opencv
-git checkout -b v${OPENCV_VERSION} ${OPENCV_VERSION}
+git checkout ${OPENCV_VERSION}
+
+cd $OPENCV_SOURCE_DIR
+git clone https://github.com/opencv/opencv_contrib.git
+cd opencv_contrib && git checkout ${OPENCV_VERSION}
 
 if [ $DOWNLOAD_OPENCV_EXTRAS == "YES" ] ; then
  echo "Installing opencv_extras"
@@ -158,6 +162,11 @@ time cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D WITH_OPENGL=ON \
       -D CUDA_NVCC_FLAGS="--expt-relaxed-constexpr" \
       -D WITH_TBB=ON \
+      -D INSTALL_C_EXAMPLES=ON \
+      -D INSTALL_PYTHON_EXAMPLES=ON \
+      -D OPENCV_EXTRA_MODULES_PATH=$OPENCV_SOURCE_DIR/opencv_contrib/modules
+      -D OPENCV_ENABLE_NONFREE=ON \
+      -D BUILD_EXAMPLES=ON \
       ../
 
 if [ $? -eq 0 ] ; then
