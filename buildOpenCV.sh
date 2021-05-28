@@ -50,13 +50,13 @@ done
 
 CMAKE_INSTALL_PREFIX=$INSTALL_DIR
 
-source scripts/jetson_variables.sh
+#source scripts/jetson_variables.sh
 
 # Print out the current configuration
-echo "Build configuration: "
-echo " NVIDIA Jetson $JETSON_BOARD"
-echo " Operating System: $JETSON_L4T_STRING [Jetpack $JETSON_JETPACK]"
-echo " Current OpenCV Installation: $JETSON_OPENCV"
+#echo "Build configuration: "
+#echo " NVIDIA Jetson $JETSON_BOARD"
+#echo " Operating System: $JETSON_L4T_STRING [Jetpack $JETSON_JETPACK]"
+#echo " Current OpenCV Installation: $JETSON_OPENCV"
 echo " OpenCV binaries will be installed in: $CMAKE_INSTALL_PREFIX"
 echo " OpenCV Source will be installed in: $OPENCV_SOURCE_DIR"
 
@@ -66,7 +66,7 @@ sudo apt-add-repository universe
 sudo apt-get update
 
 # Download dependencies for the desired configuration
-cd $WHEREAMI
+#cd $WHEREAMI
 # For Ubuntu 18.04, add for OpenGL, ie
 # sudo apt-get install libgl1 libglvnd-dev
  
