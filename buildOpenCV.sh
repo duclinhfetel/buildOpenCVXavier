@@ -60,9 +60,6 @@ echo " Current OpenCV Installation: $JETSON_OPENCV"
 echo " OpenCV binaries will be installed in: $CMAKE_INSTALL_PREFIX"
 echo " OpenCV Source will be installed in: $OPENCV_SOURCE_DIR"
 
-if [ $DOWNLOAD_OPENCV_EXTRAS == "YES" ] ; then
- echo "Also installing opencv_extras"
-fi
 
 # Repository setup
 sudo apt-add-repository universe
@@ -101,7 +98,7 @@ sudo apt-get install -y \
 cd /usr/local/cuda/include
 sudo patch -N cuda_gl_interop.h $WHEREAMI'/patches/OpenGLHeader.patch' 
 # Clean up the OpenGL tegra libs that usually get crushed
-cd /usr/lib/aarch64-linux-gnu/
+#cd /usr/lib/aarch64-linux-gnu/
 # sudo ln -sf tegra/libGL.so libGL.so
 
 # Python 2.7
@@ -120,15 +117,6 @@ git checkout ${OPENCV_VERSION}
 cd $OPENCV_SOURCE_DIR
 git clone https://github.com/opencv/opencv_contrib.git
 cd opencv_contrib && git checkout ${OPENCV_VERSION}
-
-if [ $DOWNLOAD_OPENCV_EXTRAS == "YES" ] ; then
- echo "Installing opencv_extras"
- # This is for the test data
- cd $OPENCV_SOURCE_DIR
- git clone https://github.com/opencv/opencv_extra.git
- cd opencv_extra
- git checkout -b v${OPENCV_VERSION} ${OPENCV_VERSION}
-fi
 
 cd $OPENCV_SOURCE_DIR/opencv
 mkdir build
@@ -164,7 +152,7 @@ time cmake -D CMAKE_BUILD_TYPE=RELEASE \
       -D WITH_TBB=ON \
       -D INSTALL_C_EXAMPLES=ON \
       -D INSTALL_PYTHON_EXAMPLES=ON \
-      -D OPENCV_EXTRA_MODULES_PATH=$OPENCV_SOURCE_DIR/opencv_contrib/modules
+      -D OPENCV_EXTRA_MODULES_PATH=$OPENCV_SOURCE_DIR/opencv_contrib/modules \
       -D OPENCV_ENABLE_NONFREE=ON \
       -D BUILD_EXAMPLES=ON \
       ../
