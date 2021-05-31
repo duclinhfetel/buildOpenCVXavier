@@ -197,6 +197,8 @@ else
    exit 1
 fi
 
+sudo sh -c 'echo "/usr/local/lib" >> /etc/ld.so.conf.d/opencv.conf'
+sudo ldconfig
 # check installation
 IMPORT_CHECK="$(python -c "import cv2 ; print(cv2.__version__)")"
 if [[ $IMPORT_CHECK != *$OPENCV_VERSION* ]]; then
