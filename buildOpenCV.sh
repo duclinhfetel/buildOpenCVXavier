@@ -62,8 +62,8 @@ echo " OpenCV Source will be installed in: $OPENCV_SOURCE_DIR"
 
 
 # Repository setup
-sudo apt-add-repository universe
-sudo apt-get update
+#sudo apt-add-repository universe
+#sudo apt-get update
 
 # Download dependencies for the desired configuration
 #cd $WHEREAMI
